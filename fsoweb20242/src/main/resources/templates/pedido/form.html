@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        
+        <nav th:replace="layout :: menu">(menu)</nav>
+        <main class="container">
+            <h1>Insira o Valor</h1>
+            <form th:action="@{/pedidos}" method="POST" th:object="${pedido}">
+
+                <input type="hidden" th:field="*{id}">
+
+                <!-- Campo de Mês -->
+                <div class="form-group">
+                    <label for="txtMes">Mês</label>
+                    <select id="txtMes" class="form-control" th:field="*{mes}">
+                        <option value="janeiro" th:selected="${pedido.mes == 'janeiro'}">Janeiro</option>
+                        <option value="fevereiro" th:selected="${pedido.mes == 'fevereiro'}">Fevereiro</option>
+                        <option value="marco" th:selected="${pedido.mes == 'marco'}">Março</option>
+                        <option value="abril" th:selected="${pedido.mes == 'abril'}">Abril</option>
+                        <option value="maio" th:selected="${pedido.mes == 'maio'}">Maio</option>
+                        <option value="junho" th:selected="${pedido.mes == 'junho'}">Junho</option>
+                        <option value="julho" th:selected="${pedido.mes == 'julho'}">Julho</option>
+                        <option value="agosto" th:selected="${pedido.mes == 'agosto'}">Agosto</option>
+                        <option value="setembro" th:selected="${pedido.mes == 'setembro'}">Setembro</option>
+                        <option value="outubro" th:selected="${pedido.mes == 'outubro'}">Outubro</option>
+                        <option value="novembro" th:selected="${pedido.mes == 'novembro'}">Novembro</option>
+                        <option value="dezembro" th:selected="${pedido.mes == 'dezembro'}">Dezembro</option>
+                    </select>
+                </div>
+
+                <!-- Campo de Salário -->
+                <div class="form-group">
+                    <label for="txtSalario">Salário</label>
+                    <input type="number" id="txtSalario" class="form-control" th:field="*{salario}" placeholder="Informe o salário">
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Itens de Gastos Vinculados
+                        </h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Valor</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="umItem, stat : *{itens}">
+                                    <td th:text="${umItem.produto?.descricao}"></td>
+                                    <input type="hidden" th:field="*{itens[__${stat.index}__].produto}">
+                                    
+                                    <td th:text="${umItem.valor} : *{itens}"></td>
+                                    <input type="hidden" th:field="*{itens[__${stat.index}__].valor}">
+
+                                    <td>
+                                        <button class="btn btn-danger" type="submit" name="removeitem" th:value="${stat.index}">Remover</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Novo Item de Pedido
+                        </h5>
+                        <div class="form-group">
+                            <label for="cbproduto">Produto:</label>
+                            <select class="form-select" id="cbproduto" th:field="${novoItem.produto}">
+                                <option th:each="umproduto : ${listaProdutos}" th:value="${umproduto.id}" th:text="${umproduto.descricao}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtValorPedido">Valor:</label>
+                            <input type="number" id="txtValorPedido" class="form-control" th:field="${novoItem.valor}">
+                        </div>
+                        <br>
+                        <button type="submit" name="incitem" class="btn btn-primary">Adicionar Item</button>
+                    </div>
+                </div>
+
+                <button type="submit" name="save" class="btn btn-primary">Enviar</button>
+            </form>
+        </main>
+
+        <div th:include="layout :: footer">(footer)</div>
+    </body>
+</html>
