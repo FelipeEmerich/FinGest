@@ -18,7 +18,7 @@
                 <tbody>
                     <tr th:each="umproduto : ${listaProdutos}">
                         <td th:text="${umproduto.descricao}"></td>
-                        <td th:text="${umproduto.valor}"></td>
+                    
                         <td>
                             <a th:href="@{'/produtos/alterar/' + ${umproduto.id}}"
                                 class="btn btn-warning"

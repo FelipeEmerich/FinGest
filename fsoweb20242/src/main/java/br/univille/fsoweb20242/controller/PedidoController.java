@@ -92,9 +92,11 @@ public class PedidoController {
     }
 
     @PostMapping(params = "removeitem")
-    public ModelAndView removerItem(@RequestParam("removeitem") long itemId, Pedido pedido){
-        // Remover o item com base no id do item
-        pedido.getItens().removeIf(item -> item.getId() == itemId);
+    public ModelAndView removerItem(@RequestParam("removeitem") int itemIndex, Pedido pedido){
+        // Remover o item com base no índice
+        if (itemIndex >= 0 && itemIndex < pedido.getItens().size()) {
+            pedido.getItens().remove(itemIndex); // Remover o item pela posição na lista
+        }
 
         var listaProdutos = produtoService.getAll();
         HashMap<String,Object> dados = new HashMap<>();
@@ -109,13 +111,13 @@ public class PedidoController {
     public ModelAndView delete(@PathVariable("id") long id){
         var pedido = service.getById(id);
         if(pedido != null){
-            service.delete(id);
+            service.delete(id); // Excluir o pedido por ID
         }
         return new ModelAndView("redirect:/pedidos");
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ModelAndView handle404Exception(AccessDeniedException ex) {
-        return new ModelAndView("erro/400");
+        return new ModelAndView("erro/400"); // Página de erro personalizada
     }
 }
