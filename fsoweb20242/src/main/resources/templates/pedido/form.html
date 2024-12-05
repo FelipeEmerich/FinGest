@@ -53,7 +53,7 @@
                                     <td th:text="${umItem.produto?.descricao}"></td>
                                     <input type="hidden" th:field="*{itens[__${stat.index}__].produto}">
                                     
-                                    <td th:text="${umItem.valor} : *{itens}"></td>
+                                    <td th:text="${umItem.valor}"></td>
                                     <input type="hidden" th:field="*{itens[__${stat.index}__].valor}">
 
                                     <td>

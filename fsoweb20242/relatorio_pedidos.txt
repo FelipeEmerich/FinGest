@@ -1,0 +1,12 @@
+Relatório de Pedidos
+
+Mês: janeiro
+Salário: 12.0
+Itens:
+ - Nintendo Switch | 12.0
+
+Mês: maio
+Salário: 1000.0
+Itens:
+ - Nintendo Switch | 500.0
+

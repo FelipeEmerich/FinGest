@@ -40,7 +40,6 @@
                         <th>Mes</th>
                         <th>Salário</th>
                         <th>Itens</th>
-                        <th>Valor</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -50,10 +49,12 @@
                         <td th:text="${pedido.salario}"></td>
                         <td>
                             <ul>
-                                <li th:each="item : ${pedido.itens}" th:text="${item.produto.descricao}"></li>
+                                <li th:each="item : ${pedido.itens}">
+                                    <span th:text="${item.produto.descricao}">Descrição do Produto</span> - R$ 
+                                    <span th:text="${item.valor}">Valor</span>
+                                </li>
                             </ul>
                         </td>
-                        <td th:text="${pedido.salario}"></td>
                         <td>
                             <a th:href="@{/pedidos/alterar/{id}(id=${pedido.id})}" class="btn btn-warning">Alterar</a>
                             <a th:href="@{/pedidos/delete/{id}(id=${pedido.id})}" class="btn btn-danger">Deletar</a>

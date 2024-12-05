@@ -8,5 +8,6 @@ public interface PedidoService {
     Pedido save(Pedido Pedido);
     Pedido delete(long id);
     Pedido getById(long id);
-    Object getByMes(String mes);
+    List<Pedido> getByMes(String mes);  // Atualizado para retornar List<Pedido>
+    List<Pedido> findAll();  // Já está correto
 }

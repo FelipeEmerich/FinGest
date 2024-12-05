@@ -2,15 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head th:include="layout :: htmlhead"></head>
     <body>
-        
         <nav th:replace="layout :: menu">(menu)</nav>
-
-
-        <main>
+        <main class="container">
             <h1>FinGest</h1>
+
+            <!-- Filtro por Mês -->
+            <form th:action="@{/balanco}" method="GET">
+                <div class="form-group">
+                    <label for="filtroMes">Filtrar por Mês</label>
+                    <select id="filtroMes" class="form-control" name="mes">
+                        <option value="" th:selected="${param.mes == ''}">Todos</option>
+                        <option value="janeiro" th:selected="${param.mes == 'janeiro'}">Janeiro</option>
+                        <option value="fevereiro" th:selected="${param.mes == 'fevereiro'}">Fevereiro</option>
+                        <option value="marco" th:selected="${param.mes == 'marco'}">Março</option>
+                        <option value="abril" th:selected="${param.mes == 'abril'}">Abril</option>
+                        <option value="maio" th:selected="${param.mes == 'maio'}">Maio</option>
+                        <option value="junho" th:selected="${param.mes == 'junho'}">Junho</option>
+                        <option value="julho" th:selected="${param.mes == 'julho'}">Julho</option>
+                        <option value="agosto" th:selected="${param.mes == 'agosto'}">Agosto</option>
+                        <option value="setembro" th:selected="${param.mes == 'setembro'}">Setembro</option>
+                        <option value="outubro" th:selected="${param.mes == 'outubro'}">Outubro</option>
+                        <option value="novembro" th:selected="${param.mes == 'novembro'}">Novembro</option>
+                        <option value="dezembro" th:selected="${param.mes == 'dezembro'}">Dezembro</option>
+                    </select>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
+
+            <!-- Exibição de Salário, Gastos e Balanço -->
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Salário</h5>
+                            <p th:text="${salario}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Gastos</h5>
+                            <p th:text="${gastos}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Balanço</h5>
+                            <p th:text="${balanco}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
-
-
 
         <div th:include="layout :: footer">(footer)</div>
     </body>

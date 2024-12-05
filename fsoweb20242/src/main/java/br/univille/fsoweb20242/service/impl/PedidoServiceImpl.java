@@ -17,7 +17,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public List<Pedido> getAll() {
-        return repository.findAll();
+        return repository.findAll();  // Já está correto, retorna todos os pedidos
     }
 
     @Override
@@ -35,11 +35,18 @@ public class PedidoServiceImpl implements PedidoService {
     @SuppressWarnings("deprecation")
     @Override
     public Pedido getById(long id) {
-        return repository.getById(id);
+        return repository.getById(id);  // Essa é uma forma mais antiga de obter, mas funciona
     }
 
     @Override
     public List<Pedido> getByMes(String mes) {
-        return repository.findByMes(mes);
+        return repository.findByMes(mes);  // A filtragem dos pedidos pelo mês
+    }
+
+    // Implementação explícita de findAll()
+    @Override
+    public List<Pedido> findAll() {
+        // Caso você precise de alguma lógica de manipulação ou filtro, faça aqui.
+        return repository.findAll();  // Retorna todos os pedidos sem filtragem (igual ao getAll)
     }
 }
